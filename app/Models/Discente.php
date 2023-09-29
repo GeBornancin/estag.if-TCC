@@ -19,9 +19,15 @@ class Discente extends Model
         'descricaoDiscente',
         'telefoneDiscente',
         'area_id',
+        'user_id',
         'fotoDiscente',
         
     ]; 
+
+    public function user()
+    {
+        return $this->belongsTo('\App\Models\User');
+    }
 
     public function area()
     {
