@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use HasRoles;   
+    // use HasRoles;   
 
     /**
      * The attributes that are mass assignable.
@@ -44,9 +44,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function morphTo(){
-        return \App\Models\Discente::class;
-    }
+    // public function morphTo(){
+    //     return \App\Models\Discente::class;
+    // }
 
  
 }
