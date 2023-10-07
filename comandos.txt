@@ -1,0 +1,8 @@
+composer require league/flysystem-aws-s3-v3 --with-all-dependencies
+composer require "aws/aws-sdk-php-laravel"
+
+no config/app.php colocar no package service providers 
+Aws\Laravel\AwsServiceProvider::class
+
+e no alisases 
+"AWS" => Aws\Laravel\AwsFacade::class,

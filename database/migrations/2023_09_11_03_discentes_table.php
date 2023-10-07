@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('discentes', function (Blueprint $table){
 
             $table->id();
-            $table->timestamp('idadeDiscente');
+            $table->string('nomeDiscente');
+            $table->integer('idadeDiscente');
             $table->string('periodoDiscente');
             $table->boolean('statusDiscente');
             $table->text('descricaoDiscente');
@@ -22,8 +23,8 @@ return new class extends Migration
             $table->string('telefoneDiscente')->unique();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('area_id');
-            $table->foreign('area_id')->references('id')->on('areas');
+            $table->unsignedBigInteger('curso_id');
+            $table->foreign('curso_id')->references('id')->on('cursos');
             $table->softDeletes();
             $table->timestamps();
 

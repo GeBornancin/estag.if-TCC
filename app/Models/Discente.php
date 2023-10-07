@@ -12,13 +12,13 @@ class Discente extends Model
     use SoftDeletes;
 
     protected $fillable = [
-
+        'nomeDiscente',
         'idadeDiscente',
         'periodoDiscente',
         'statusDiscente',
         'descricaoDiscente',
         'telefoneDiscente',
-        'area_id',
+        'curso_id',
         'user_id',
         'fotoDiscente',
         
@@ -29,9 +29,9 @@ class Discente extends Model
         return $this->belongsTo('\App\Models\User');
     }
 
-    public function area()
+    public function curso()
     {
-        return $this->belongsTo('\App\Models\Area');
+        return $this->belongsTo('\App\Models\Curso');
     }
    
 }

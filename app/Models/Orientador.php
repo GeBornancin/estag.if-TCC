@@ -14,11 +14,11 @@ class Orientador extends Model
     protected $fillable = [
         'nomeOrientador',
         'statusOrientador',
-        'area_id'
+        'curso_id'
     ];
 
-    public function area() {
-        return $this->belongsTo('\App\Models\Area');
+    public function curso() {
+        return $this->belongsTo('\App\Models\Curso');
     }
 }
 

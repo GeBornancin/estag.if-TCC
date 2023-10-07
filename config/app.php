@@ -159,6 +159,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Aws\Laravel\AwsServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Application Service Providers...
@@ -182,7 +183,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
+        "AWS" => Aws\Laravel\AwsFacade::class,
     ])->toArray(),
 
 ];

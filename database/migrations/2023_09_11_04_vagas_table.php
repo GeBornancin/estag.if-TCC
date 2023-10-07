@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('localVaga');
             $table->string('periodoVaga');
             $table->unsignedBigInteger('empresa_id');
-            $table->unsignedBigInteger('area_id');
+            $table->unsignedBigInteger('curso_id');
             $table->foreign('empresa_id')->references('id')->on('empresas');
-            $table->foreign('area_id')->references('id')->on('areas');
+            $table->foreign('curso_id')->references('id')->on('cursos');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -41,4 +41,4 @@ return new class extends Migration
 // 'localVaga',
 // 'periodoVaga',
 // 'empresa_id',
-// 'area_id',
+// 'curso_id',

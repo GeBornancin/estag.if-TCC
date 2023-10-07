@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nomeOrientador');
             $table->boolean('statusOrientador');
-            $table->unsignedBigInteger('area_id');
-            $table->foreign('area_id')->references('id')->on('areas');
+            $table->unsignedBigInteger('curso_id');
+            $table->foreign('curso_id')->references('id')->on('cursos');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -32,4 +32,4 @@ return new class extends Migration
 };
 // 'nomeOrientador',
 // 'statusOrientador',
-// 'area_id'
+// 'curso_id'
