@@ -18,7 +18,7 @@
         color: white;
         border-width: 3px;
         background-color: #166534;
-
+        
         padding: 0.5em;
         border: thin solid #166534;
         border-radius: 3px;
@@ -29,7 +29,11 @@
         background-color: #15803D;
         cursor: grab;
     }
-    
+    #descricaoDiscente{
+        border-color: #3B82F6;
+        resize: none;
+        height: 200px;
+    }
     
    
 </style>
@@ -66,15 +70,24 @@
         <div class="mt-4">
             <x-input-label for="telefoneDiscente" :value="__('Telefone')" />
             <x-text-input id="telefoneDiscente" class="block mt-1 w-full" type="text" name="telefoneDiscente"
-                :value="old('telefoneDiscente')" required autocomplete="telefoneDiscente" />
+                :value="old('telefoneDiscente')" required autocomplete="telefoneDiscente" 
+                placeholder="(99) 99999-9999" 
+                pattern="\(\d{2}\) \d{5}-\d{4}" maxlength="15" 
+                oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')" />
             <x-input-error :messages="$errors->get('telefoneDiscente')" class="mt-2" />
         </div>
+        
+        
 
         <!-- Periodo -->
         <div class="mt-4">
-            <x-input-label for="periodoDiscente" :value="__('Periodo (Ex: Matutino)')" />
-            <x-text-input id="periodoDiscente" class="block mt-1 w-full" type="text" name="periodoDiscente"
-                :value="old('periodoDiscente')" required autocomplete="periodoDiscente" />
+            <x-input-label for="periodoDiscente" :value="__('Periodo')" />
+            <select class="select_" name="periodoDiscente">
+                <option value="">Selecione um periodo</option>
+                <option value="Matutino">Matutino</option>
+                <option value="Vespertino">Vespertino</option>
+                <option value="Noturno">Noturno</option>
+            </select>
             <x-input-error :messages="$errors->get('periodoDiscente')" class="mt-2" />
         </div>
 

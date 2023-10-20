@@ -55,11 +55,6 @@
                         <a href="{{ url('/dashboard') }}" class="btn btn-primary">Dashboard</a>
                     @else
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="{{ route('dashboard') }}"><i class="autenticacao"></i>
-                                    Visitante </a>
-                            {{-- <a  href="{{ url('/dashboard') }}" class="btn btn-primary">Dashboard</a> --}}
-                            </li>
                         </ul>
                         <ul class="navbar-nav ">
                             <li class="nav-item ">

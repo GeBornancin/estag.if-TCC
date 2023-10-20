@@ -3,15 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Curso;
 
 class CursoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');   
+    }
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $cursos = Curso::all();
+
+        return view('cursos.index', compact('cursos'));
     }
 
     /**
@@ -19,7 +27,9 @@ class CursoController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', Curso::class);
+
+        return view('cursos.create');
     }
 
     /**
@@ -27,15 +37,16 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+           'nomeCurso' => ['required', 'string', 'max:255'],
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        $this->authorize('create', Curso::class);
+
+        Curso::create($request->all());
+
+        return redirect()->route('cursos.index');
+
     }
 
     /**
@@ -43,7 +54,9 @@ class CursoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $this->authorize('update', Curso::class);
+
+        return view('cursos.edit', compact(['curso']));
     }
 
     /**
@@ -51,14 +64,22 @@ class CursoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->authorize('update', Curso::class);
+
+        $curso->update($request->all());
+
+        return redirect()->route('cursos.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id) 
     {
-        //
+        $this->authorize('delete', Curso::class);
+
+        Curso::destroy($curso->id);
+
+        return redirect()->route('cursos.index');
     }
 }
