@@ -1,4 +1,7 @@
 <x-guest-layout>
+        <!-- <div class="image-logo" style="display: flex; justify-content: center; align-items: center;">
+            <x-application-logo/>
+       </div> -->
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <form method="POST" action="{{ route('login') }}">

@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CursoController;
+use App\Http\Controllers\EmpresaController;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::resource('/cursos', CursoController::class);
+Route::resource('/empresas', EmpresaController::class);
+
+Route::get('/empresas/{empresa}/logo', [EmpresaController::class, 'getAwsFile'])->name('empresas.logo');
 require __DIR__.'/auth.php';
