@@ -76,7 +76,11 @@
         <div class="mt-4">
             <x-input-label for="telefoneDiscente" :value="__('Telefone')" />
             <x-text-input id="telefoneDiscente" class="block mt-1 w-full" type="text" name="telefoneDiscente"
+<<<<<<< HEAD
                 :value="old('telefoneDiscente')" 
+=======
+                :value="old('telefoneDiscente')" required autocomplete="telefoneDiscente" 
+>>>>>>> 75697dd7a8bea343fba3233ad01e61981ebaa017
                 placeholder="(99) 99999-9999" 
                 pattern="\(\d{2}\) \d{5}-\d{4}" maxlength="15" 
                 oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')" />
@@ -88,7 +92,11 @@
         <!-- Periodo -->
         <div class="mt-4">
             <x-input-label for="periodoDiscente" :value="__('Periodo')" />
+<<<<<<< HEAD
             <select class="select_" name="periodoDiscente" >
+=======
+            <select class="select_" name="periodoDiscente">
+>>>>>>> 75697dd7a8bea343fba3233ad01e61981ebaa017
                 <option value="">Selecione um periodo</option>
                 <option value="Matutino">Matutino</option>
                 <option value="Vespertino">Vespertino</option>

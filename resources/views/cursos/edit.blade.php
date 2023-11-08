@@ -7,7 +7,11 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+<<<<<<< HEAD
             <form method="post" action="{{route('cursos.update', $curso)}}">
+=======
+            <form action="{{route('cursos.update', $curso)}}">
+>>>>>>> 75697dd7a8bea343fba3233ad01e61981ebaa017
                 @csrf
                 @method('PUT')
                 <div class="form-group">

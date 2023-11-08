@@ -20,7 +20,10 @@
                     <tr>
                         <th scope="col">#ID</th>
                         <th scope="col">Nome do Curso</th>
+<<<<<<< HEAD
                         <th scope="col">Ações</th>
+=======
+>>>>>>> 75697dd7a8bea343fba3233ad01e61981ebaa017
                     </tr>
                 </thead>
 

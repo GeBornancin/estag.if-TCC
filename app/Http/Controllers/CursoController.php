@@ -7,7 +7,14 @@ use App\Models\Curso;
 
 class CursoController extends Controller
 {
+<<<<<<< HEAD
 
+=======
+    public function __construct()
+    {
+        $this->middleware('auth');   
+    }
+>>>>>>> 75697dd7a8bea343fba3233ad01e61981ebaa017
     
     /**
      * Display a listing of the resource.
@@ -34,12 +41,16 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
         $this->authorize('createCurso', Curso::class);
 
+=======
+>>>>>>> 75697dd7a8bea343fba3233ad01e61981ebaa017
         $request->validate([
            'nomeCurso' => ['required', 'string', 'max:255'],
         ]);
 
+<<<<<<< HEAD
         $curso = Curso::create([
             'nomeCurso' => $request->nomeCurso,
         ]);
@@ -53,6 +64,15 @@ class CursoController extends Controller
     public function show(Curso $curso)
     {
         //echo "Metodo SHOW";
+=======
+        $this->authorize('create', Curso::class);
+
+        Curso::create($request->all());
+
+        return redirect()->route('cursos.index');
+
+    }
+>>>>>>> 75697dd7a8bea343fba3233ad01e61981ebaa017
 
         $this->authorize('viewCurso', Curso::class);
 
@@ -63,9 +83,13 @@ class CursoController extends Controller
      */
     public function edit(Curso $curso)
     {
+<<<<<<< HEAD
     
         // Autoriza a ação
         $this->authorize('updateCurso', Curso::class);
+=======
+        $this->authorize('update', Curso::class);
+>>>>>>> 75697dd7a8bea343fba3233ad01e61981ebaa017
 
         return view('cursos.edit', compact(['curso']));
     }
@@ -75,6 +99,7 @@ class CursoController extends Controller
      */
     public function update(Request $request, string $id)
     {
+<<<<<<< HEAD
         $this->authorize('updateCurso', Curso::class);
     
         $curso = Curso::findOrFail($id);
@@ -89,6 +114,12 @@ class CursoController extends Controller
 
         $curso->save();
     
+=======
+        $this->authorize('update', Curso::class);
+
+        $curso->update($request->all());
+
+>>>>>>> 75697dd7a8bea343fba3233ad01e61981ebaa017
         return redirect()->route('cursos.index');
     }
 
@@ -97,11 +128,17 @@ class CursoController extends Controller
      */
     public function destroy(string $id) 
     {
+<<<<<<< HEAD
         $this->authorize('deleteCurso', Curso::class);
 
         $curso = Curso::findOrFail($id);
 
         $curso->delete();
+=======
+        $this->authorize('delete', Curso::class);
+
+        Curso::destroy($curso->id);
+>>>>>>> 75697dd7a8bea343fba3233ad01e61981ebaa017
 
         return redirect()->route('cursos.index');
     }
