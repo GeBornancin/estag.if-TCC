@@ -30,14 +30,10 @@ class CursoPolicy
      */
     public function view(User $user, Curso $curso)
     {
-<<<<<<< HEAD
         if($user->tipoUsuario ==='admin'){
             return true;
         }
          return false;
-=======
-        return $user->id === $curso->user_id;
->>>>>>> 75697dd7a8bea343fba3233ad01e61981ebaa017
     }
 
     /**
@@ -48,14 +44,10 @@ class CursoPolicy
      */
     public function create(User $user)
     {
-<<<<<<< HEAD
         if($user->tipoUsuario ==='admin'){
             return true;
         }
          return false;
-=======
-        return $user->admin <= 1;
->>>>>>> 75697dd7a8bea343fba3233ad01e61981ebaa017
     }
 
     /**
@@ -67,14 +59,10 @@ class CursoPolicy
      */
     public function update(User $user, Curso $curso)
     {
-<<<<<<< HEAD
         if($user->tipoUsuario ==='admin'){
             return true;
         }
          return false;
-=======
-        return $user->id === $curso->user_id;
->>>>>>> 75697dd7a8bea343fba3233ad01e61981ebaa017
     }
 
     /**
@@ -86,14 +74,10 @@ class CursoPolicy
      */
     public function delete(User $user, Curso $curso)
     {
-<<<<<<< HEAD
         if($user->tipoUsuario ==='admin'){
             return $user->hasPermissionTo('deleteCurso');
         }
          return false;
-=======
-        return $user->id === $curso->user_id;
->>>>>>> 75697dd7a8bea343fba3233ad01e61981ebaa017
     }
 
     /**

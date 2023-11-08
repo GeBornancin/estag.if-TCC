@@ -86,7 +86,6 @@ class RegisteredUserController extends Controller
                     
                     $path = 'fotoDiscente/' . $filename;
 
-                    
                 }
                 
                 
@@ -101,7 +100,7 @@ class RegisteredUserController extends Controller
                     'curso_id' => $request->curso_id,
                     'fotoDiscente' => $filename, // Salva a URL completa no banco de dados
                 ]);
-                Storage::disk('s3')->put($path, file_get_contents($file));
+                Storage::disk('s3')->put($path, file_get_contents($file), 'public');
             }
 
             event(new Registered($user));

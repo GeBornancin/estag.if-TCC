@@ -70,7 +70,7 @@ public function store(Request $request)
                 
             ]);
 
-            Storage::disk('s3')->put($path, file_get_contents($file));
+            Storage::disk('s3')->put($path, file_get_contents($file),'public');
     } catch (\Exception $e) {
         // Handle the exception here
         dd($e->getMessage());
@@ -117,30 +117,32 @@ public function store(Request $request)
             'telefoneEmpresa' => 'required',
             'emailEmpresa' => 'required',
             'descricaoEmpresa' => 'required',
-            'logoEmpresa' => 'required',
+            'logoEmpresa' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        
+        $filename = $empresa->logoEmpresa;
 
         if($request->hasFile('logoEmpresa')){
             $file = $request->file('logoEmpresa');
             $extension = $file->getClientOriginalExtension();
             $filename = hash('sha256', time() . $file->getClientOriginalName()) . '.' . $extension;
             
-            $path = 'logoEmpresa/' . $filename;
+            $path =  'logoEmpresa'. $filename;
 
-            Storage::disk('s3')->put($path, file_get_contents($file));
+            
+            Storage::disk('s3')->put($path, file_get_contents($file),'public');
+            
         }
-
+        $empresa->update([
+            'nomeEmpresa' => $request->nomeEmpresa,
+            'enderecoEmpresa' => $request->enderecoEmpresa,
+            'telefoneEmpresa' => $request->telefoneEmpresa,
+            'emailEmpresa' => $request->emailEmpresa,
+            'descricaoEmpresa' => $request->descricaoEmpresa,
+            'statusEmpresa' => $request->statusEmpresa,
+            'logoEmpresa' => $filename,
+        ]);
         
-            $empresa->update([
-                'nomeEmpresa' => $request->nomeEmpresa,
-                'enderecoEmpresa' => $request->enderecoEmpresa,
-                'telefoneEmpresa' => $request->telefoneEmpresa,
-                'emailEmpresa' => $request->emailEmpresa,
-                'descricaoEmpresa' => $request->descricaoEmpresa,
-                'statusEmpresa' => $request->statusEmpresa,
-                'logoEmpresa' => $filename,
-            ]);
-    
 
         $empresa->save();
 
@@ -165,10 +167,5 @@ public function store(Request $request)
         return redirect()->route('empresas.index');
     }
 
-    public function getAwsFile()
-    {
-        $empresa = Empresa::findOrFail($this->id);
-    
-        return Storage::disk('s3')->response('logoEmpresa/' . $empresa->logoEmpresa);
-    }
+   
 }

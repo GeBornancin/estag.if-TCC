@@ -3,12 +3,13 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Informações da Empresa') }}
         </h2>
+        <img src="{{env('AWS_URL')}}/logoEmpresa/{{$empresa->logoEmpresa}}"  alt="Logo da empresa" class="img-fluid " width="100px"  >    
     </x-slot>
-
+    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <!-- conteudo -->
-
+            <!-- conteudo -->
+            
             <div>
                 <x-input-label>Nome da empresa:
                     <h1>{{ $empresa->nomeEmpresa }}</h1>
@@ -33,7 +34,6 @@
                     @endif
                 </x-input-label>
 
-                <img src="{{ $empresa->getAwsFile() }}" alt="Logo da empresa">
                 
                
 

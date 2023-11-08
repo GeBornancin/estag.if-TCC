@@ -3,6 +3,16 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
 </head>
+<style>
+
+.logo {
+    margin-left: 50px;
+    max-width: 110px; 
+    max-height: 40px; 
+    width: auto;
+    height: auto;
+}
+</style>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -40,8 +50,8 @@
                     
                     <tr class="empresa-row {{ $empresa->statusEmpresa ? 'bg-green-100' : 'bg-pink-100' }}">
                             <th scope="row">{{$empresa->id}}</th>
-                            <td>{{$empresa->nomeEmpresa}}</td>
-                            <td>
+                            <td scope="row">{{$empresa->nomeEmpresa}}</td>
+                            <td  scope="row">
                                 @if($empresa->statusEmpresa == true)
                                     <span class="badge badge-success">Ativo</span>
                                 @else
@@ -49,7 +59,7 @@
                                 @endif
                             </td>
 
-                            <td>
+                            <td scope="row">
 
                                 <div style="display:flex">
                                     @auth
@@ -82,6 +92,7 @@
                                             </div>
                                         @endcan
                                     @endauth
+                                    <img  class="logo" src="{{env('AWS_URL')}}/logoEmpresa/{{$empresa->logoEmpresa}}"  alt="Logo da empresa"  width="50px" >    
                                 </div>
                             </td>
                         </tr>
