@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Models\Vaga;
+use App\Models\Empresa;
+use App\Models\Curso;
 use Illuminate\Http\Request;
 
 class VagaController extends Controller
@@ -11,7 +15,11 @@ class VagaController extends Controller
      */
     public function index()
     {
-        //
+        $empresas = Empresa::all();
+        $cursos = Curso::all();
+        $vagas = Vaga::all();
+
+        return view('vagas.index', compact('vagas', 'empresas', 'cursos'));
     }
 
     /**
@@ -19,7 +27,7 @@ class VagaController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
