@@ -71,13 +71,12 @@ public function store(Request $request)
             ]);
 
             Storage::disk('s3')->put($path, file_get_contents($file),'public');
+            $empresa->save();
+
     } catch (\Exception $e) {
         // Handle the exception here
         dd($e->getMessage());
     }
-    
-        
-    $empresa->save();
 
     return redirect()->route('empresas.index');
 }
