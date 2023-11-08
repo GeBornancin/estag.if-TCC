@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Models\Empresa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
+
+
 
 class EmpresaController extends Controller
 {
@@ -11,7 +17,8 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        //
+        $empresas = Empresa::all();
+        return view('empresas.index', compact('empresas'));
     }
 
     /**
@@ -19,31 +26,80 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', Empresa::class);
+
+        return view('empresas.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+public function store(Request $request)
+{
+    $this->authorize('createEmpresa', Empresa::class);
+    
+    $request->validate([
+        'nomeEmpresa' => 'required', 'string', 'max:255',
+        'enderecoEmpresa' => 'required', 'string', 'max:255',
+        'telefoneEmpresa' => 'required', 'string', 'max:255',
+        'emailEmpresa' => 'required', 'string', 'max:255',
+        'descricaoEmpresa' => 'required', 'string', 'max:255',
+        
+    ]);
+    
+    
+    
+    try {
+       
+            $file = $request->file('logoEmpresa');
+            $extension = $file->getClientOriginalExtension();
+            $filename = hash('sha256', time() . $file->getClientOriginalName()) . '.' . $extension;        
+            
+            $path = 'logoEmpresa/' . $filename;
+           
+
+            $empresa = Empresa::create([
+                'nomeEmpresa' => $request->nomeEmpresa,
+                'enderecoEmpresa' => $request->enderecoEmpresa,
+                'telefoneEmpresa' => $request->telefoneEmpresa,
+                'emailEmpresa' => $request->emailEmpresa,
+                'statusEmpresa' => $request->statusEmpresa,
+                'descricaoEmpresa' => $request->descricaoEmpresa,
+                'logoEmpresa' => $filename,
+                
+                
+            ]);
+
+            Storage::disk('s3')->put($path, file_get_contents($file));
+    } catch (\Exception $e) {
+        // Handle the exception here
+        dd($e->getMessage());
     }
+    
+        
+    $empresa->save();
+
+    return redirect()->route('empresas.index');
+}
+
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Empresa $empresa)
     {
-        //
-    }
+        $this->authorize('viewEmpresa', Empresa::class);
 
+        return view('empresas.show', compact('empresa'));
+    }
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Empresa $empresa)
     {
-        //
+        $this->authorize('updateEmpresa', Empresa::class);
+
+        return view('empresas.edit', compact(['empresa']));
     }
 
     /**
@@ -51,7 +107,44 @@ class EmpresaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->authorize('updateEmpresa', Empresa::class);
+
+        $empresa = Empresa::findOrFail($id);
+
+        $request->validate([
+            'nomeEmpresa' => 'required',
+            'enderecoEmpresa' => 'required',
+            'telefoneEmpresa' => 'required',
+            'emailEmpresa' => 'required',
+            'descricaoEmpresa' => 'required',
+            'logoEmpresa' => 'required',
+        ]);
+
+        if($request->hasFile('logoEmpresa')){
+            $file = $request->file('logoEmpresa');
+            $extension = $file->getClientOriginalExtension();
+            $filename = hash('sha256', time() . $file->getClientOriginalName()) . '.' . $extension;
+            
+            $path = 'logoEmpresa/' . $filename;
+
+            Storage::disk('s3')->put($path, file_get_contents($file));
+        }
+
+        
+            $empresa->update([
+                'nomeEmpresa' => $request->nomeEmpresa,
+                'enderecoEmpresa' => $request->enderecoEmpresa,
+                'telefoneEmpresa' => $request->telefoneEmpresa,
+                'emailEmpresa' => $request->emailEmpresa,
+                'descricaoEmpresa' => $request->descricaoEmpresa,
+                'statusEmpresa' => $request->statusEmpresa,
+                'logoEmpresa' => $filename,
+            ]);
+    
+
+        $empresa->save();
+
+        return redirect()->route('empresas.index');
     }
 
     /**
@@ -59,6 +152,23 @@ class EmpresaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->authorize('deleteEmpresa', Empresa::class);
+
+
+        $empresa = Empresa::findOrFail($id);
+
+        $path = 'logoEmpresa/' . $empresa->logoEmpresa;
+        Storage::disk('s3')->delete($path);
+
+        $empresa->delete();
+
+        return redirect()->route('empresas.index');
+    }
+
+    public function getAwsFile()
+    {
+        $empresa = Empresa::findOrFail($this->id);
+    
+        return Storage::disk('s3')->response('logoEmpresa/' . $empresa->logoEmpresa);
     }
 }
