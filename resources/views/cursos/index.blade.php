@@ -15,8 +15,8 @@
                 </div>
             @endif
 
-            <table class="table">
-                <thead>
+            <table class="table align-middle caption-top table-striped">
+                    <thead>
                     <tr>
                         <th scope="col">#ID</th>
                         <th scope="col">Nome do Curso</th>

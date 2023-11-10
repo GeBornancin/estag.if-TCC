@@ -35,7 +35,7 @@
                 </div>
             @endif
 
-            <table class="table">
+            <table class="table align-middle caption-top table-striped">
                 <thead>
                     <tr>
                         <th scope="col">#ID</th>
@@ -48,7 +48,7 @@
                 <tbody>
                     @foreach($empresas as $empresa)
                     
-                    <tr class="empresa-row {{ $empresa->statusEmpresa ? 'bg-green-100' : 'bg-pink-100' }}">
+                    <tr class="empresa-row ">
                             <th scope="row">{{$empresa->id}}</th>
                             <td scope="row">{{$empresa->nomeEmpresa}}</td>
                             <td  scope="row">
