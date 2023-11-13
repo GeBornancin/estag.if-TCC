@@ -11,6 +11,8 @@ class Orientador extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $table = 'orientadores';
+    
     protected $fillable = [
         'nomeOrientador',
         'statusOrientador',

@@ -38,6 +38,26 @@ $permissionCreateVaga->assignRole($roleAdmin);
 $permissionUpdateVaga->assignRole($roleAdmin);
 $permissionDeleteVaga->assignRole($roleAdmin);
 
+$permissionViewVinculo = Permission::findOrCreate('viewVinculo');
+$permissionCreateVinculo = Permission::findOrCreate('createVinculo');
+$permissionUpdateVinculo = Permission::findOrCreate('updateVinculo');
+$permissionDeleteVinculo = Permission::findOrCreate('deleteVinculo');
+
+$permissionViewVinculo->assignRole($roleAdmin);
+$permissionCreateVinculo->assignRole($roleAdmin);
+$permissionUpdateVinculo->assignRole($roleAdmin);
+$permissionDeleteVinculo->assignRole($roleAdmin);
+
+$permissionViewOrientador = Permission::findOrCreate('viewOrientador');
+$permissionCreateOrientador = Permission::findOrCreate('createOrientador');
+$permissionUpdateOrientador = Permission::findOrCreate('updateOrientador');
+$permissionDeleteOrientador = Permission::findOrCreate('deleteOrientador');
+
+$permissionViewOrientador->assignRole($roleAdmin);
+$permissionCreateOrientador->assignRole($roleAdmin);
+$permissionUpdateOrientador->assignRole($roleAdmin);
+$permissionDeleteOrientador->assignRole($roleAdmin);
+
 $user = User::find(1);
 $user->assignRole('admin');
 

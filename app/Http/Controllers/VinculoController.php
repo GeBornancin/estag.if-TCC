@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Models\Vinculo;
+use App\Models\Empresa;
+use App\Models\Discente;
 use Illuminate\Http\Request;
 
 class VinculoController extends Controller

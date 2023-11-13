@@ -64,6 +64,9 @@ class VagaController extends Controller
             'periodoVaga.required' => 'O campo Período da Vaga é obrigatório.',
             'empresa_id.required' => 'O campo Empresa é obrigatório.',
             'curso_id.required' => 'O campo Curso é obrigatório.',
+            'empresa_id.exists' => 'A Empresa informada não existe.',
+            'curso_id.exists' => 'O Curso informado não existe.',
+            
         ];
 
         $request->validate($regras, $mensagensPersonalizadas);

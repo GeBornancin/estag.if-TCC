@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\VagaController;
+use App\Http\Controllers\VinculoController;
+use App\Http\Controllers\OrientadorController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
@@ -36,5 +38,13 @@ Route::middleware('auth')->group(function () {
 Route::resource('/cursos', CursoController::class);
 Route::resource('/empresas', EmpresaController::class);
 Route::resource('/vagas', VagaController::class);
+Route::resource('/vinculos', VinculoController::class);
+Route::get('/orientadores', [OrientadorController::class, 'index'])->name('orientadores.index');
+Route::get('/orientadores/create', [OrientadorController::class, 'create'])->name('orientadores.create');
+Route::post('/orientadores', [OrientadorController::class, 'store'])->name('orientadores.store');
+Route::get('/orientadores/{orientador}/edit', [OrientadorController::class, 'edit'])->name('orientadores.edit');
+Route::put('/orientadores/{orientador}', [OrientadorController::class, 'update'])->name('orientadores.update');
+Route::delete('/orientadores/{orientador}', [OrientadorController::class, 'destroy'])->name('orientadores.destroy');
+
 
 require __DIR__.'/auth.php';
