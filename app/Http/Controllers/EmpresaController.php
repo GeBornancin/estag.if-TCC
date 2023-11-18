@@ -34,52 +34,44 @@ class EmpresaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-public function store(Request $request)
-{
-    $this->authorize('createEmpresa', Empresa::class);
-    
-    $request->validate([
-        'nomeEmpresa' => 'required', 'string', 'max:255',
-        'enderecoEmpresa' => 'required', 'string', 'max:255',
-        'telefoneEmpresa' => 'required', 'string', 'max:255',
-        'emailEmpresa' => 'required', 'string', 'max:255',
-        'descricaoEmpresa' => 'required', 'string', 'max:255',
+    public function store(Request $request)
+    {
+        $this->authorize('createEmpresa', Empresa::class);
+
+        $request->validate([
+            'nomeEmpresa' => 'required', 'string', 'max:255',
+            'enderecoEmpresa' => 'required', 'string', 'max:255',
+            'telefoneEmpresa' => 'required', 'string', 'max:255',
+            'emailEmpresa' => 'required', 'string', 'max:255',
+            'descricaoEmpresa' => 'required', 'string', 'max:255',
+            'logoEmpresa' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
         
-    ]);
-    
-    
-    
-    try {
-       
-            $file = $request->file('logoEmpresa');
-            $extension = $file->getClientOriginalExtension();
-            $filename = hash('sha256', time() . $file->getClientOriginalName()) . '.' . $extension;        
-            
-            $path = 'logoEmpresa/' . $filename;
-           
 
-            $empresa = Empresa::create([
-                'nomeEmpresa' => $request->nomeEmpresa,
-                'enderecoEmpresa' => $request->enderecoEmpresa,
-                'telefoneEmpresa' => $request->telefoneEmpresa,
-                'emailEmpresa' => $request->emailEmpresa,
-                'statusEmpresa' => $request->statusEmpresa,
-                'descricaoEmpresa' => $request->descricaoEmpresa,
-                'logoEmpresa' => $filename,
-                
-                
-            ]);
+        $file = $request->file('logoEmpresa');
+        $extension = $file->getClientOriginalExtension();
+        $filename = hash('sha256', time() . $file->getClientOriginalName()) . '.' . $extension;
 
-            Storage::disk('s3')->put($path, file_get_contents($file),'public');
-            $empresa->save();
+        $path = 'logoEmpresa/' . $filename;
 
-    } catch (\Exception $e) {
-        // Handle the exception here
-        dd($e->getMessage());
+
+        $empresa = Empresa::create([
+            'nomeEmpresa' => $request->nomeEmpresa,
+            'enderecoEmpresa' => $request->enderecoEmpresa,
+            'telefoneEmpresa' => $request->telefoneEmpresa,
+            'emailEmpresa' => $request->emailEmpresa,
+            'statusEmpresa' => $request->statusEmpresa,
+            'descricaoEmpresa' => $request->descricaoEmpresa,
+            'logoEmpresa' => $filename,
+
+        ]);
+
+        Storage::disk('s3')->put($path, file_get_contents($file), 'public');
+
+        $empresa->save();
+
+        return redirect()->route('empresas.index');
     }
-
-    return redirect()->route('empresas.index');
-}
 
 
     /**
@@ -118,20 +110,22 @@ public function store(Request $request)
             'descricaoEmpresa' => 'required',
             'logoEmpresa' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        
+
         $filename = $empresa->logoEmpresa;
 
-        if($request->hasFile('logoEmpresa')){
+        if ($request->hasFile('logoEmpresa')) {
             $file = $request->file('logoEmpresa');
             $extension = $file->getClientOriginalExtension();
             $filename = hash('sha256', time() . $file->getClientOriginalName()) . '.' . $extension;
-            
-            $path =  'logoEmpresa'. $filename;
 
-            
-            Storage::disk('s3')->put($path, file_get_contents($file),'public');
-            
+            $path =  'logoEmpresa' . $filename;
+
+
+            Storage::disk('s3')->put($path, file_get_contents($file), 'public');
+        }else{
+            $filename = $empresa->logoEmpresa;
         }
+        
         $empresa->update([
             'nomeEmpresa' => $request->nomeEmpresa,
             'enderecoEmpresa' => $request->enderecoEmpresa,
@@ -141,7 +135,7 @@ public function store(Request $request)
             'statusEmpresa' => $request->statusEmpresa,
             'logoEmpresa' => $filename,
         ]);
-        
+
 
         $empresa->save();
 
@@ -165,6 +159,4 @@ public function store(Request $request)
 
         return redirect()->route('empresas.index');
     }
-
-   
 }

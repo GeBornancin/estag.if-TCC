@@ -13,22 +13,14 @@ class Candidatura extends Model
 
     protected $fillable = [
         'discente_id',
-        'empresa_id',
         'vaga_id',
         'curriculo',
+        'dataCandidatura',
     ]; 
-
-    protected $dates = [
-        'dataCandidatura'
-    ];
-
+    
     public function discente()
     {
         return $this->belongsTo('App\Models\Discente');
-    }
-    public function empresa()
-    {
-        return $this->belongsTo('App\Models\Empresa');
     }
     public function vaga()
     {

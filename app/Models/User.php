@@ -50,5 +50,9 @@ class User extends Authenticatable
     //     return \App\Models\Discente::class;
     // }
 
+    public function discente()
+{
+    return $this->hasOne(Discente::class);
+}
  
 }

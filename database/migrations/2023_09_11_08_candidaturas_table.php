@@ -15,10 +15,8 @@ return new class extends Migration
 
             $table->id();
             $table->unsignedBigInteger('discente_id');
-            $table->unsignedBigInteger('empresa_id');
             $table->unsignedBigInteger('vaga_id');
             $table->foreign('discente_id')->references('id')->on('discentes');
-            $table->foreign('empresa_id')->references('id')->on('empresas');
             $table->foreign('vaga_id')->references('id')->on('vagas');
             $table->date('dataCandidatura');
             $table->string('curriculo');
@@ -40,6 +38,5 @@ return new class extends Migration
 
 // 'discente_id',
 // 'vaga_id',
-// 'empresa_id',
 // 'dataCandidatura'
 // 'curriculo' => 'blob',

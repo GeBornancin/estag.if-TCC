@@ -58,6 +58,19 @@ $permissionCreateOrientador->assignRole($roleAdmin);
 $permissionUpdateOrientador->assignRole($roleAdmin);
 $permissionDeleteOrientador->assignRole($roleAdmin);
 
+$permissionViewCandidatura = Permission::findOrCreate('viewCandidatura');
+$permissionCreateCandidatura = Permission::findOrCreate('createCandidatura');
+$permissionUpdateCandidatura = Permission::findOrCreate('updateCandidatura');
+$permissionDeleteCandidatura = Permission::findOrCreate('deleteCandidatura');
+$permissionCreateCandidatura = Permission::findOrCreate('viewAllCandidatura');
+
+$permissionViewCandidatura->assignRole($roleAdmin);
+$permissionCreateCandidatura->assignRole($roleAdmin);
+$permissionUpdateCandidatura->assignRole($roleAdmin);
+$permissionDeleteCandidatura->assignRole($roleAdmin);
+
+
+
 $user = User::find(1);
 $user->assignRole('admin');
 

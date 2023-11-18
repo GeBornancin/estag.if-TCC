@@ -33,7 +33,6 @@ class VagaController extends Controller
         $empresas = Empresa::all();
         $cursos = Curso::all();
 
-
         return view('vagas.create', compact('empresas', 'cursos'));
     }
 
@@ -43,8 +42,6 @@ class VagaController extends Controller
     public function store(Request $request)
     {
         $this->authorize('createVaga', Vaga::class);
-
-
 
         $regras=[
             'tituloVaga' => 'required', 'string', 'max:255',
@@ -92,7 +89,7 @@ class VagaController extends Controller
      */
     public function show(Vaga $vaga)
     {
-        $this->authorize('viewVaga', Vaga::class);
+        // $this->authorize('viewVaga', Vaga::class);
 
         $empresa = $vaga->empresa;
 

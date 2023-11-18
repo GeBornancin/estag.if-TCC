@@ -103,9 +103,7 @@
                 <br>
 
                 <button class="btn  bg-green-800 text-white hover:bg-green-700">Editar</button>
-                <button class="btn  btn-secondary">
-                    <a href="{{route('orientadores.index')}}">Cancelar</a>
-                </button>
+                <button onclick="window.location.href = '{{ route('orientadores.index') }}'" class="btn bg-gray-500 text-white hover:bg-gray-400">Cancelar</button>
 
             </form>
 

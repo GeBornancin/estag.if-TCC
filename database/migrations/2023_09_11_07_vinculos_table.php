@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('orientador_id')->references('id')->on('orientadores');
             $table->boolean('statusVinculo');
             $table->string('contrato');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

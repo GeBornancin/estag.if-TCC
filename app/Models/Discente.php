@@ -17,7 +17,7 @@ class Discente extends Model
         'periodoDiscente',
         'statusDiscente',
         'descricaoDiscente',
-        'telefoneDiscente',
+        'telefoneDiscente', 
         'curso_id',
         'user_id',
         'fotoDiscente',
@@ -33,5 +33,5 @@ class Discente extends Model
     {
         return $this->belongsTo('\App\Models\Curso');
     }
-   
+    
 }

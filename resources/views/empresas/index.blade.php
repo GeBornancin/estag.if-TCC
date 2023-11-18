@@ -26,7 +26,6 @@
                     <x-text-input type="text" class="form-control" id="filtroNome" placeholder="Filtrar empresa por nome"  />
             </div>
 
-
             @if(Auth::check())
                 <div style="margin-bottom:2%">
                     <button type="button" class="btn btn-outline-primary">
@@ -92,7 +91,7 @@
                                             </div>
                                         @endcan
                                     @endauth
-                                    <img  class="logo" src="{{env('AWS_URL')}}/logoEmpresa/{{$empresa->logoEmpresa}}"  alt="Logo da empresa"  width="50px" >    
+                                    <img  class="logo" src="{{env('AWS_URL')}}/logoEmpresa/{{$empresa->logoEmpresa}}"  alt="Logo da empresa"  width="50px"  >    
                                 </div>
                             </td>
                         </tr>

@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Vaga;
+use App\Models\Vinculo;
 use Illuminate\Auth\Access\Response;
 
-class VagaPolicy
+class VinculoPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -18,7 +18,7 @@ class VagaPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Vaga $vaga)
+    public function view(User $user, Vinculo $vinculo): bool
     {
         if($user->tipoUsuario ==='admin'){
             return true;
@@ -29,7 +29,7 @@ class VagaPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         if($user->tipoUsuario ==='admin'){
             return true;
@@ -40,7 +40,7 @@ class VagaPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Vaga $vaga): bool
+    public function update(User $user, Vinculo $vinculo): bool
     {
         if($user->tipoUsuario ==='admin'){
             return true;
@@ -51,7 +51,7 @@ class VagaPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Vaga $vaga): bool
+    public function delete(User $user, Vinculo $vinculo): bool
     {
         if($user->tipoUsuario ==='admin'){
             return true;
@@ -62,7 +62,7 @@ class VagaPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Vaga $vaga)
+    public function restore(User $user, Vinculo $vinculo)
     {
         //
     }
@@ -70,7 +70,7 @@ class VagaPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Vaga $vaga)
+    public function forceDelete(User $user, Vinculo $vinculo)
     {
         //
     }

@@ -33,13 +33,13 @@
         .cardCss:hover {
             transform:translateY(10px);
             transition: all 0.3s ease-in-out;
-            border: 3px solid #0086FF;
+            border: 3px solid #00921C;
             
         }
 
         .titulo {
             width: 100%;
-            background-color: #0086FF;
+            background-color: #00921C;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -83,7 +83,7 @@
                     <div class="card-body">
                         <div style="display:flex">
                             @auth
-                            @can('delete', $vaga)
+                            <!-- @can('delete', $vaga) -->
                             <div style="margin-right:2%;">
                                 <form method="post" action=" {{ route('vagas.destroy', $vaga) }} " onsubmit="return confirm('Tem certeza que deseja REMOVER {{ addslashes($vaga->titulo) }}?')">
                                     @csrf
@@ -93,89 +93,28 @@
                                     </button>
                                 </form>
                             </div>
-                            @endcan
+                            <!-- @endcan -->
 
-                            @can('update', $vaga)
+                            <!-- @can('update', $vaga) -->
                             <div style="margin-right:2%;">
                                 <button type="button" class="btn btn-outline-success">
                                     <a href="{{ route('vagas.edit', $vaga) }}">Editar</a>
                                 </button>
                             </div>
-                            @endcan
+                            <!-- @endcan -->
 
-                            @can('view', $vaga)
+                            <!-- @can('view', $vaga) -->
                             <div style="margin-right:2%;">
                                 <button type="button" class="btn btn-outline-info">
                                     <a href="{{ route('vagas.show', $vaga) }}">Informações</a>
                                 </button>
                             </div>
-                            @endcan
+                            <!-- @endcan -->
                             @endauth
 
                         </div>
                     </div>
                 </div>
-                <!-- <div class="card">
-                    
-                    <div class="card-header">
-                        <h1 class="card-title">
-                            {{$vaga->tituloVaga}}
-                        </h1>
-                    </div>
-                    <div class="card-text">
-                        <p>
-                        Empresa:
-                        {{$vaga->empresa->nomeEmpresa}}
-                        </p>
-                        <p>
-                            Endereço:
-                            {{ $vaga->localVaga }}
-                        </p>
-                        <br>
-                        Periodo:
-                        {{ $vaga->periodoVaga }}
-                        <br>
-                        Curso:
-                        {{ $vaga->curso->nomeCurso}}
-                    </div>
-                    <div class="card-footer">
-                        <div style="display:flex">
-                            @auth
-                            @can('delete', $vaga)
-                            <div style="margin-right:2%;">
-                                <form method="post" action=" {{ route('vagas.destroy', $vaga) }} " onsubmit="return confirm('Tem certeza que deseja REMOVER {{ addslashes($vaga->titulo) }}?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-outline-danger">
-                                        Excluir
-                                    </button>
-                                </form>
-                            </div>
-                            @endcan
-
-                            @can('update', $vaga)
-                            <div style="margin-right:2%;">
-                                <button type="button" class="btn btn-outline-success">
-                                    <a href="{{ route('vagas.edit', $vaga) }}">Editar</a>
-                                </button>
-                            </div>
-                            @endcan
-
-                            @can('view', $vaga)
-                            <div style="margin-right:2%;">
-                                <button type="button" class="btn btn-outline-info">
-                                    <a href="{{ route('vagas.show', $vaga) }}">Informações</a>
-                                </button>
-                            </div>
-                            @endcan
-                            @endauth
-
-                        </div>
-                    </div>
-                    
-
-                </div> -->
-
                 @endforeach
             </div>
         </div>

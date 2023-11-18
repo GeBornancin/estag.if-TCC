@@ -7,6 +7,7 @@ use App\Http\Controllers\VagaController;
 use App\Http\Controllers\VinculoController;
 use App\Http\Controllers\OrientadorController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CandidaturaController;
 use App\Models\User;
 
 
@@ -39,12 +40,20 @@ Route::resource('/cursos', CursoController::class);
 Route::resource('/empresas', EmpresaController::class);
 Route::resource('/vagas', VagaController::class);
 Route::resource('/vinculos', VinculoController::class);
+
 Route::get('/orientadores', [OrientadorController::class, 'index'])->name('orientadores.index');
 Route::get('/orientadores/create', [OrientadorController::class, 'create'])->name('orientadores.create');
 Route::post('/orientadores', [OrientadorController::class, 'store'])->name('orientadores.store');
 Route::get('/orientadores/{orientador}/edit', [OrientadorController::class, 'edit'])->name('orientadores.edit');
 Route::put('/orientadores/{orientador}', [OrientadorController::class, 'update'])->name('orientadores.update');
 Route::delete('/orientadores/{orientador}', [OrientadorController::class, 'destroy'])->name('orientadores.destroy');
+
+Route::get('/candidaturas/{discente}', [CandidaturaController::class, 'index'])->name('candidaturas.index');
+Route::get('/candidaturas/create/{vaga}', [CandidaturaController::class, 'create'])->name('candidaturas.create');
+Route::post('/candidaturas/{vaga}', [CandidaturaController::class, 'store'])->name('candidaturas.store');
+Route::get('/candidaturas/{candidatura}/edit', [CandidaturaController::class, 'edit'])->name('candidaturas.edit');
+Route::put('/candidaturas/{candidatura}', [CandidaturaController::class, 'update'])->name('candidaturas.update');
+Route::delete('/candidaturas/{candidatura}', [CandidaturaController::class, 'destroy'])->name('candidaturas.destroy');
 
 
 require __DIR__.'/auth.php';

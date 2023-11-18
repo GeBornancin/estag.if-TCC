@@ -1,3 +1,7 @@
+<head>
+    <meta charset="utf-8">
+    <script src="{{ asset('js/app.js') }}" defer></script>
+</head>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight" >
@@ -7,6 +11,11 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+            <div class="mb-3">
+                <x-text-input type="text" class="form-control" id="filtroNome" placeholder="Filtrar orientador por nome"  />
+            </div>
+
             @if(Auth::check())
                 <div style="margin-bottom: 2%">
                     <button type="button" class="btn btn-outline-primary">
@@ -28,7 +37,7 @@
 
                 <tbody>
                     @foreach($orientadores as $orientador)
-                        <tr>
+                        <tr class="orientador-row">
                             <th scope="row">{{$orientador->id}}</th>
                             <td scope="row">{{$orientador->nomeOrientador}}</td>
                             <td scope="row">
@@ -71,5 +80,25 @@
             </table>
         </div>
     </div>
+    <script>
+        // Captura o campo de entrada
+        const filtroNomeInput = document.getElementById('filtroNome');
+
+        // Adiciona um ouvinte de eventos de entrada para o campo de entrada
+        filtroNomeInput.addEventListener('input', () => {
+            const filtroNome = filtroNomeInput.value.toLowerCase();
+            const linhas = document.querySelectorAll('.orientador-row');
+
+            // Itera pelas linhas e oculta/mostra com base no nome da orientador
+            linhas.forEach((linha) => {
+                const nomeOrientador = linha.querySelector('td').textContent.toLowerCase();
+                if (nomeOrientador.includes(filtroNome)) {
+                    linha.style.display = 'table-row';
+                } else {
+                    linha.style.display = 'none';
+                }
+            });
+        });
+    </script>
 
 </x-app-layout> 
